@@ -13,6 +13,8 @@ import { ToolRouterService } from "../tools/application/services";
 import { PrismaUserRepository } from "../users/infrastructure";
 import { UserRepository } from "../users/domain/repositories";
 import { DolarScrapperTool } from "../tools/infrastrucure/tools";
+import { ToolLogRepository } from "../tools/domain/repòsitories";
+import { PrismaToolLogRepository } from "../tools/infrastrucure/persistance";
 
 @Module({
     controllers: [WhatsAppWebhookController, MessageController],
@@ -43,7 +45,11 @@ import { DolarScrapperTool } from "../tools/infrastrucure/tools";
             provide: UserRepository,
             useClass: PrismaUserRepository
         },
-        DolarScrapperTool
+        DolarScrapperTool,
+        {
+            provide: ToolLogRepository,
+            useClass: PrismaToolLogRepository
+        }
     ],
     exports: [
         CreateMessageUseCase,
