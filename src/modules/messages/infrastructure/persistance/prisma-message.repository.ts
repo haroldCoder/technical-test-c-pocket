@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@/core/infrastructure/prisma";
 
-import { MessageRepository } from "../domain/repositories";
-import { MessageEntity } from "../domain/entities";
+import { MessageRepository } from "../../domain/repositories";
+import { MessageEntity } from "../../domain/entities";
 
 @Injectable()
 export class PrismaMessageRepository implements MessageRepository {
