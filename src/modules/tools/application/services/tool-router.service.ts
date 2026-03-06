@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { DolarScrapperTool } from "../../infrastrucure/tools";
-import { ToolNotFoundException } from "../../domain/exceptions";
 import { ToolLogRepository } from "../../domain/repòsitories";
 import { ToolLogEntity } from "../../domain/entities";
 

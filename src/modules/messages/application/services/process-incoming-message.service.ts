@@ -22,8 +22,6 @@ export class ProcessIncomingMessageService {
 
         const user = await this.userService.findOrCreate(phone);
 
-        console.log(user);
-
         // Guardar mensaje del usuario
         const { id: messageId } = await this.createMessage.execute({
             userId: user.id,

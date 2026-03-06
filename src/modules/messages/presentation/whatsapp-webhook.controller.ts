@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Query, Body } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ProcessIncomingMessageService } from "../application/services";
-import { WhatsAppWebhookDto } from "../interfaces";
+import { MessageDto } from "../interfaces";
 
 @ApiTags("Webhook/WhatsApp")
 @Controller("webhook/whatsapp")
@@ -37,11 +37,10 @@ export class WhatsAppWebhookController {
     @Post()
     @ApiOperation({ summary: "Receive WhatsApp messages" })
     @ApiResponse({ status: 200, description: "Message received or ignored." })
-    async receiveMessage(@Body() body: WhatsAppWebhookDto) {
+    async receiveMessage(@Body() body: MessageDto) {
         try {
-            const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
-            const phone = message?.from;
-            const text = message?.text?.body;
+            const phone = body.from;
+            const text = body.text;
 
             if (!phone || !text) {
                 return { status: "ignored" };
