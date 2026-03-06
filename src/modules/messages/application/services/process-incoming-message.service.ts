@@ -53,7 +53,7 @@ export class ProcessIncomingMessageService {
             default:
                 await this.whatsappService.sendTextMessage(phone, response);
                 break;
-        }
+        } // podriamos usar redis con BullMQ para que no se colapse el sistema(por tiempo no se puede)
     }
 
 }
