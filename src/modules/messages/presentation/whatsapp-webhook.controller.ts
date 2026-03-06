@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Query, Body } from "@nestjs/common";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ProcessIncomingMessageService } from "../application/services";
 import { WhatsAppWebhookDto } from "../interfaces";
 
+@ApiTags("Webhook/WhatsApp")
 @Controller("webhook/whatsapp")
 export class WhatsAppWebhookController {
     constructor(
@@ -12,6 +14,11 @@ export class WhatsAppWebhookController {
      * Verificación del webhook (Meta lo exige)
      */
     @Get()
+    @ApiOperation({ summary: "Webhook verification (Meta requirement)" })
+    @ApiQuery({ name: "hub.mode", description: "Mode (subscribe)" })
+    @ApiQuery({ name: "hub.challenge", description: "Subscription challenge" })
+    @ApiQuery({ name: "hub.verify_token", description: "Verification token" })
+    @ApiResponse({ status: 200, description: "Returns the challenge if verification succeeds." })
     verifyWebhook(
         @Query("hub.mode") mode: string,
         @Query("hub.challenge") challenge: string,
@@ -28,6 +35,8 @@ export class WhatsAppWebhookController {
      * Recepción de mensajes de WhatsApp
      */
     @Post()
+    @ApiOperation({ summary: "Receive WhatsApp messages" })
+    @ApiResponse({ status: 200, description: "Message received or ignored." })
     async receiveMessage(@Body() body: WhatsAppWebhookDto) {
         try {
             const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
