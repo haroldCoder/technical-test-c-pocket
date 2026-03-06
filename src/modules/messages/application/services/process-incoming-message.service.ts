@@ -25,7 +25,7 @@ export class ProcessIncomingMessageService {
         console.log(user);
 
         // Guardar mensaje del usuario
-        await this.createMessage.execute({
+        const { id: messageId } = await this.createMessage.execute({
             userId: user.id,
             content: message,
             role: "USER",
@@ -35,7 +35,8 @@ export class ProcessIncomingMessageService {
 
         const toolResult = await this.toolRouter.route(
             intent.intent,
-            intent.entities
+            intent.entities,
+            messageId
         );
 
         const response = await this.aiService.generateResponse(toolResult);
