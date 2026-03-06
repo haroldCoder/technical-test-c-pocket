@@ -5,7 +5,7 @@ import { MessageRepository } from "./domain/repositories";
 import { WhatsAppService } from "./application/ports";
 import { TwilioProvider, WhatsAppProvider } from "./infrastructure/whatsapp";
 import { ProcessIncomingMessageService } from "./application/services";
-import { WhatsAppWebhookController } from "./presentation";
+import { WhatsAppWebhookController, MessageController } from "./presentation";
 import { UserService } from "../users/application/services";
 import { AIService } from "../ai/domain/services";
 import { GeminiProvider } from "../ai/infrastructure/providers";
@@ -15,7 +15,7 @@ import { UserRepository } from "../users/domain/repositories";
 import { DolarScrapperTool } from "../tools/infrastrucure/tools";
 
 @Module({
-    controllers: [WhatsAppWebhookController],
+    controllers: [WhatsAppWebhookController, MessageController],
     providers: [
         CreateMessageUseCase,
         GetConversationUseCase,
