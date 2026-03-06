@@ -8,7 +8,7 @@ import { ProcessIncomingMessageService } from "./application/services";
 import { WhatsAppWebhookController } from "./presentation";
 import { UserService } from "../users/application/services";
 import { AIService } from "../ai/domain/services";
-import { OpenAIProvider } from "../ai/infrastructure/providers";
+import { GeminiProvider } from "../ai/infrastructure/providers";
 import { ToolRouterService } from "../tools/application/services";
 import { PrismaUserRepository } from "../users/infrastructure";
 import { UserRepository } from "../users/domain/repositories";
@@ -36,7 +36,7 @@ import { DolarScrapperTool } from "../tools/infrastrucure/tools";
         UserService,
         {
             provide: AIService,
-            useClass: OpenAIProvider
+            useClass: GeminiProvider
         },
         ToolRouterService,
         {

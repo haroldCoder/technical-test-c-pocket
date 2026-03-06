@@ -11,7 +11,7 @@ export class ToolRouterService {
             case "dolar_price":
                 return this.dollarTool.execute();
             default:
-                throw new ToolNotFoundException(intent);
+                null;
         }
     }
 }

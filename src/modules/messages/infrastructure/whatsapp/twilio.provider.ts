@@ -19,6 +19,8 @@ export class TwilioProvider implements WhatsAppService {
                 body: message,
             });
         } catch (error) {
+            console.log(error);
+
             throw new SendMessageException("Failed to send WhatsApp message via Twilio");
         }
     }

@@ -49,7 +49,7 @@ export class ProcessIncomingMessageService {
 
         switch (provider) {
             case "twilio":
-                await this.twilioProvider.sendTextMessage(phone, response);
+                await this.twilioProvider.sendTextMessage(phone, response.slice(0, 160));
                 break;
             default:
                 await this.whatsappService.sendTextMessage(phone, response);

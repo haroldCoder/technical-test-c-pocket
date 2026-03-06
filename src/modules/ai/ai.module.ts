@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { OpenAIProvider } from "./infrastructure/providers/openai.provider";
+import { GeminiProvider } from "./infrastructure/providers";
 import { AIService } from "./domain/services";
 import { AnalizeIntentUseCase } from "./application/use-cases";
 import { GenerateResponseUseCase } from "./application/use-cases";
@@ -10,7 +10,7 @@ import { GenerateResponseUseCase } from "./application/use-cases";
         GenerateResponseUseCase,
         {
             provide: AIService,
-            useClass: OpenAIProvider
+            useClass: GeminiProvider // GeminiProvider(gemini Ia), OpenAIProvider(openAi)
         }
     ],
     exports: [AnalizeIntentUseCase, GenerateResponseUseCase]
